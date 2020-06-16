@@ -1,20 +1,22 @@
 
 
 // my key: 4973b465133a426fc92080785c763347
+var city = "";
 var longitude = 0;
 var latitude = 0;
-var city = "Philadelphia";
 var apiKey = "4973b465133a426fc92080785c763347";
 var cityArray = JSON.parse(localStorage.getItem("cities")) || [];
-var sampleCityBtns = ["Boston","Florida","Philadelphia","New York","Chicago","Cherry Hill","Denver","Seattle"];
+var sampleCityBtns = ["Philadelphia","Boston","Florida","New York","Chicago","Cherry Hill","Denver","Seattle"];
 var sampleCityBtns2= ["Austin","Los Angeles","Phoenix","San Diego","El Paso","Dallas","Las Vegas","Miami"];
 //When localStorage empty we want to present some city options on our list-group
 if(cityArray.length == 0){
+    city = "Philadelphia";
     for(var i=0; i < $(".list-group-item").length; i++){
         $("#ls"+(i+1)).html(sampleCityBtns[i]);
     }
 }
 else {
+    city = cityArray[cityArray.length - 1];
     var counter = 0;
     //If it's not empty we want to display cities previously searched, from top to bottom
     for(var i=cityArray.length; i > 0 && counter < 8 ; i--){
