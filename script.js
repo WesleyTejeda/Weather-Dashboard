@@ -23,10 +23,13 @@ $.ajax({
     }).then(function(newWeatherData){
         console.log(lattitude+" "+longitude);
         console.log(newWeatherData);
-        var temp = ((newWeatherData.daily[0].temp.day) - 273.15) * 9/5 + 32;
-        var humid = newWeatherData.daily[0].humidity;
-        var windSpd = newWeatherData.daily[0].wind_speed;
-        var uvIndex = newWeatherData.daily[0].uvi;
-        console.log(temp+"|"+humid+"|"+windSpd+"|"+uvIndex);
+        //Daily stats
+        for(var i=0; i < 5; i++){
+            var temp = ((newWeatherData.daily[i].temp.day) - 273.15) * 9/5 + 32;
+            var humid = newWeatherData.daily[i].humidity;
+            var windSpd = newWeatherData.daily[i].wind_speed;
+            var uvIndex = newWeatherData.daily[i].uvi;
+            console.log(temp+"|"+humid+"|"+windSpd+"|"+uvIndex);
+        }
     });
 });
