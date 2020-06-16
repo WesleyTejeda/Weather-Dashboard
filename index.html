@@ -31,14 +31,20 @@
                         <button type="button" class="list-group-item list-group-item-action"></button>
                     </div>
             </div>
-            <div class="col-9" style="background: white;">
+            <div class="col-9">
                 <div class="row">
                     <div class="border p-3 m-3 w-100"> 
-                        <h2>City Name</h2>
-                        <p>Temperature:</p>
-                        <p>Humidity:</p>
-                        <p>Wind Speed:</p>
-                        <p>UV Index:</p>
+                        <div class="row">
+                            <h2 id="currCity"></h2>
+                            <img style="width: 60px;" id="currIcon"/>
+                        </div>
+                        <p id="currTemp">Temperature:</p>
+                        <p id="currHumid">Humidity:</p>
+                        <p id="currWindSpd">Wind Speed:</p>
+                        <div class="row pl-3">
+                            <p >UV Index: </p>
+                            <p id="currUVI" class="card ml-2 pl-2 pr-2"></p>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -47,54 +53,54 @@
                     </div>
                     <div class="row ml-3 w-100">
                         <div class="col">
-                            <div class="row pl-3 w-100">
+                            <div class="row pl-1 w-100">
                                 <div class="col pr-3">
                                     <div id="day1" class="card">
-                                        <figure class="card-body">
-                                            <h3 id="day1Date"></h3>
-                                            <i id="day1Icon"></i>
-                                            <h3 id="day1Temp"></h3>
-                                            <h3 id="day1Humid"></h3>
+                                        <figure class="bg-primary text-light card-body">
+                                            <p id="day1Date"></p>
+                                            <img id="day1Icon"/>
+                                            <p id="day1Temp"></p>
+                                            <p id="day1Humid"></p>
                                         </figure>
                                     </div>
                                 </div>
                                 <div class="col pr-3">
                                     <div id="day2" class="card">
-                                        <figure class="card-body">
-                                            <h3 id="day2Date"></h3>
-                                            <i id="day2Icon"></i>
-                                            <h3 id="day2Temp"></h3>
-                                            <h3 id="day2Humid"></h3>
+                                        <figure class="bg-primary text-light card-body">
+                                            <p id="day2Date"></p>
+                                            <img id="day2Icon"/>
+                                            <p id="day2Temp"></p>
+                                            <p id="day2Humid"></p>
                                         </figure>
                                     </div>
                                 </div>
                                 <div class="col pr-3">
                                     <div id="day3" class="card">
-                                        <figure class="card-body">
-                                            <h3 id="day3Date"></h3>
-                                            <i id="day3Icon"></i>
-                                            <h3 id="day3Temp"></h3>
-                                            <h3 id="day3Humid"></h3>
+                                        <figure class="bg-primary text-light card-body">
+                                            <p id="day3Date"></p>
+                                            <img id="day3Icon"/>
+                                            <p id="day3Temp"></p>
+                                            <p id="day3Humid"></p>
                                         </figure>
                                     </div>
                                 </div>
                                 <div class="col pr-3">
                                     <div id="day4" class="card">
-                                        <figure class="card-body">
-                                            <h3 id="day4Date"></h3>
-                                            <i id="day4Icon"></i>
-                                            <h3 id="day4Temp"></h3>
-                                            <h3 id="day4Humid"></h3>
+                                        <figure class="bg-primary text-light card-body">
+                                            <p id="day4Date"></p>
+                                            <img id="day4Icon"/>
+                                            <p id="day4Temp"></p>
+                                            <p id="day4Humid"></p>
                                         </figure>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div id="day5" class="card">
-                                        <figure class="card-body">
-                                            <h3 id="day5Date"></h3>
-                                            <i id="day5Icon"></i>
-                                            <h3 id="day5Temp"></h3>
-                                            <h3 id="day5Humid"></h3>
+                                        <figure class="bg-primary text-light card-body">
+                                            <p id="day5Date"></p>
+                                            <img id="day5Icon"/>
+                                            <p id="day5Temp"></p>
+                                            <p id="day5Humid"></p>
                                         </figure>
                                     </div>
                                 </div>
@@ -107,5 +113,6 @@
     </main>
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="script.js"></script>
 </html>
