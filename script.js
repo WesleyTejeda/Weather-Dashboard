@@ -32,6 +32,7 @@ else {
     }
 }
 //Initialize elements on page with weather info
+console.log(city);
 getData();
 $(".list-group-item").each(function(){
     $(this).on("click",function(){
