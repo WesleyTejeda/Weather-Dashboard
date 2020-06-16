@@ -5,16 +5,46 @@ var longitude = 0;
 var latitude = 0;
 var city = "Philadelphia";
 var apiKey = "4973b465133a426fc92080785c763347";
-// var cityArray = JSON.parse(localStorage.getItem("city")) || [];
+var cityArray = JSON.parse(localStorage.getItem("cities")) || [];
+var sampleCityBtns = ["Boston","Florida","Philadelphia","New York","Chicago","Cherry Hill","Denver","Seattle"];
+var sampleCityBtns2= ["Austin","Los Angeles","Phoenix","San Diego","El Paso","Dallas","Las Vegas","Miami"];
+//When localStorage empty we want to present some city options on our list-group
+if(cityArray.length == 0){
+    for(var i=0; i < $(".list-group-item").length; i++){
+        $("#ls"+(i+1)).html(sampleCityBtns[i]);
+    }
+}
+else {
+    var counter = 0;
+    //If it's not empty we want to display cities previously searched, from top to bottom
+    for(var i=cityArray.length; i > 0 && counter < 8 ; i--){
+        var assignStoredCity = cityArray[i-1].city;
+        $("#ls"+(counter+1)).html(assignStoredCity);
+        counter++;
+    }
+    //If some buttons are still empty, pull sample cities from second sample array
+    if(counter < 8){
+        for(var i= counter; i < 8; i++){
+            $("#ls"+(i+1)).html(sampleCityBtns2[i]);
+        }
+    }
+}
+//Initialize elements on page with weather info
 getData();
 $(".list-group-item").each(function(){
-
+    $(this).on("click",function(){
+        city = $(this).html();
+        getData();
+        cityArray.push({city: city});
+        localStorage.setItem("cities", JSON.stringify(cityArray));
+    })
 });
 
 $("#srchBtn").on("click", function(event){
     event.preventDefault();
     city = $(this).siblings("input").val();
-    console.log(city);
+    cityArray.push({city: city});
+    localStorage.setItem("cities", JSON.stringify(cityArray));
     getData();
 });
 
