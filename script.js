@@ -100,7 +100,6 @@ function getData(){
                 var temp = ((newWeatherData.daily[i].temp.day) - 273.15) * 9/5 + 32;
                 var humid = newWeatherData.daily[i].humidity;
                 var windSpd = newWeatherData.daily[i].wind_speed;
-                var uvIndex = newWeatherData.daily[i].uvi;
                 $("#day"+(i+1)+"Date").html(day);
                 $("#day"+(i+1)+"Icon").attr("src", "assets/"+icon+".png")
                 $("#day"+(i+1)+"Temp").html("Temp: "+temp.toFixed(2));
@@ -111,7 +110,7 @@ function getData(){
             temp = ((newWeatherData.current.temp) - 273.15) * 9/5 + 32;;
             humid = newWeatherData.current.humidity;
             windSpd = newWeatherData.current.wind_speed;
-            uvIndex = newWeatherData.current.uvi;
+            var uvIndex = newWeatherData.current.uvi;
             icon = newWeatherData.current.weather[0].icon;
             //Displaying them to html elements
             $("#currCity").html(city+" "+day);
@@ -121,19 +120,20 @@ function getData(){
             $("#currWindSpd").html("Wind Speed: "+windSpd);
             $("#currUVI").html(uvIndex);
             //Adds a class or style to UV card depending on the level
-            uvIndex = parseInt(uvIndex);
             if(uvIndex <= 2)
                 //Green
                 $("#currUVI").attr("class","card ml-2 pl-2 pr-2 text-light bg-success");
             else if( 3 <= uvIndex && uvIndex <=5)
                 //Yellow
                 $("#currUVI").attr("class","card ml-2 pl-2 pr-2 text-light bg-warning");
-            else if( 6 <= uvIndex && uvIndex <= 7)
+            else if( 6 <= uvIndex && uvIndex <= 7.0){
                 //Orange
-                $("#currUVI").attr("style","background: rgb(236, 89, 4);");
+                $("#currUVI").attr("style","background: rgb(236, 89, 4);").removeClass("bg-success bg-warning bg-danger");
+
+            }
             else
                 //Red
-                $("#currUVI").attr("class","card ml-2 pl-2 pr-2 text-light bg-danger");
+                $("#currUVI").attr("class","card ml-2 pl-2 pr-2 text-light bg-danger").removeAttr("style","background");
         });
     });
 };
