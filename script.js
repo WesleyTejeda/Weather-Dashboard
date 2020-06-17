@@ -1,5 +1,3 @@
-
-
 // my key: 4973b465133a426fc92080785c763347
 var city = "";
 var longitude = 0;
@@ -32,7 +30,6 @@ else {
     }
 }
 //Initialize elements on page with weather info
-console.log(city);
 getData();
 //When a list-group-item is clicked then take in the city, display the weather info and add it to local storage
 $(".list-group-item").each(function(){
@@ -41,9 +38,6 @@ $(".list-group-item").each(function(){
         city = $(this).html();
         //We retrieve the weather data using new city value
         getData();
-        //Save the city selected
-        cityArray.push({city: city});
-        localStorage.setItem("cities", JSON.stringify(cityArray));
         //We cycle through our list items and rearrange the cities based on search history
         cycleCityChanged($(this).attr("id"));
     })
@@ -54,10 +48,7 @@ $("#srchBtn").on("click", function(event){
     //We assign the inputted text to city
     city = $(this).siblings("input").val().trim();
     //We retrieve the weather data using new city value
-    getData();
-    //Save the city selected
-    cityArray.push({city: city});
-    localStorage.setItem("cities", JSON.stringify(cityArray));
+    getData()
     //We set a placeholder to use for our cycle function
     var pointToItem = $(this).attr("id");
     //Keeps track of any changed to placeholder
@@ -79,7 +70,6 @@ $("#srchBtn").on("click", function(event){
 //First call gets us the city's long-lat values
 function getData(){
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid="+apiKey;
-    console.log(queryURL);
     $.ajax({
         url: queryURL,
         method: "GET"
@@ -87,6 +77,10 @@ function getData(){
         console.log(weatherData);
         //Takes in correct capitalization of city
         city = weatherData.city.name;
+        console.log(city);
+        //Save the city selected
+        cityArray.push({city: city});
+        localStorage.setItem("cities", JSON.stringify(cityArray));
         //What we need:
         //Grab longitude and longitude from city
         longitude = weatherData.city.coord.lon;
@@ -119,7 +113,6 @@ function getData(){
             windSpd = newWeatherData.current.wind_speed;
             uvIndex = newWeatherData.current.uvi;
             icon = newWeatherData.current.weather[0].icon;
-
             //Displaying them to html elements
             $("#currCity").html(city+" "+day);
             $("#currIcon").attr("src", "assets/"+icon+".png");
@@ -131,16 +124,16 @@ function getData(){
             uvIndex = parseInt(uvIndex);
             if(uvIndex <= 2)
                 //Green
-                $("#currUVI").addClass("bg-success");
+                $("#currUVI").attr("class","card ml-2 pl-2 pr-2 text-light bg-success");
             else if( 3 <= uvIndex && uvIndex <=5)
                 //Yellow
-                $("#currUVI").addClass("bg-warning");
+                $("#currUVI").attr("class","card ml-2 pl-2 pr-2 text-light bg-warning");
             else if( 6 <= uvIndex && uvIndex <= 7)
                 //Orange
                 $("#currUVI").attr("style","background: rgb(236, 89, 4);");
             else
                 //Red
-                $("#currUVI").addClass("bg-danger");
+                $("#currUVI").attr("class","card ml-2 pl-2 pr-2 text-light bg-danger");
         });
     });
 };
