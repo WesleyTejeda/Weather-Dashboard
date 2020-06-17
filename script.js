@@ -54,32 +54,27 @@ $("#srchBtn").on("click", function(event){
     //We assign the inputted text to city
     city = $(this).siblings("input").val().trim();
     //We retrieve the weather data using new city value
-    var notFound = getData();
+    getData();
     //Save the city selected
-    if(notFound){
-        alert("City not found. Try another, or check spelling.")
-    }
-    else {
-        cityArray.push({city: city});
-        localStorage.setItem("cities", JSON.stringify(cityArray));
-        //We set a placeholder to use for our cycle function
-        var pointToItem = $(this).attr("id");
-        //Keeps track of any changed to placeholder
-        var changed = false;
-        //Go through each list item and compare any duplicate to our search city
-        $(".list-group-item").each(function(){
-            if(city == $(this).html()){
-                //If the city searched is on the list. We point to the already existing display of this city
-                pointToItem = $(this).attr("id");
-                changed = true;
-            }
-        });
-        //We must pick the sorting functions based on change
-        if(changed)
-            cycleCityChanged(pointToItem);
-        else
-            searchBarCycleList();
-    }
+    cityArray.push({city: city});
+    localStorage.setItem("cities", JSON.stringify(cityArray));
+    //We set a placeholder to use for our cycle function
+    var pointToItem = $(this).attr("id");
+    //Keeps track of any changed to placeholder
+    var changed = false;
+    //Go through each list item and compare any duplicate to our search city
+    $(".list-group-item").each(function(){
+        if(city == $(this).html()){
+            //If the city searched is on the list. We point to the already existing display of this city
+            pointToItem = $(this).attr("id");
+            changed = true;
+        }
+    });
+    //We must pick the sorting functions based on change
+    if(changed)
+        cycleCityChanged(pointToItem);
+    else
+        searchBarCycleList();
 });
 //First call gets us the city's long-lat values
 function getData(){
@@ -89,15 +84,13 @@ function getData(){
         url: queryURL,
         method: "GET"
     }).then(function getData(weatherData){
+        console.log(weatherData);
+        //Takes in correct capitalization of city
+        city = weatherData.city.name;
         //What we need:
         //Grab longitude and longitude from city
         longitude = weatherData.city.coord.lon;
         lattitude = weatherData.city.coord.lat;
-        //If city not found
-        console.log(weatherData.message);
-        if(weatherData.message == "city not found"){
-            return false;
-        }
                 //https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={YOUR API KEY}
         queryURL="https://api.openweathermap.org/data/2.5/onecall?lat="+lattitude+"&lon="+longitude+"&appid="+apiKey;
         //Second call retrieves the daily weather and forecast.
