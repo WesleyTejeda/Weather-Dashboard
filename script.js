@@ -34,6 +34,7 @@ else {
 //Initialize elements on page with weather info
 console.log(city);
 getData();
+//When a list-group-item is clicked then take in the city, display the weather info and add it to local storage
 $(".list-group-item").each(function(){
     $(this).on("click",function(){
         city = $(this).html();
@@ -42,7 +43,7 @@ $(".list-group-item").each(function(){
         localStorage.setItem("cities", JSON.stringify(cityArray));
     })
 });
-
+//When the user uses the search bar we take the input and display the city, display the weather info and add it to local storage
 $("#srchBtn").on("click", function(event){
     event.preventDefault();
     city = $(this).siblings("input").val();
@@ -50,7 +51,7 @@ $("#srchBtn").on("click", function(event){
     localStorage.setItem("cities", JSON.stringify(cityArray));
     getData();
 });
-
+//First call gets us the city's long-lat values
 function getData(){
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid="+apiKey;
     console.log(queryURL);
@@ -65,6 +66,7 @@ function getData(){
 
                 //https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={YOUR API KEY}
         queryURL="https://api.openweathermap.org/data/2.5/onecall?lat="+lattitude+"&lon="+longitude+"&appid="+apiKey;
+        //Second call retrieves the daily weather and forecast.
         $.ajax({
             url: queryURL,
             method: "GET"
@@ -83,7 +85,7 @@ function getData(){
                 $("#day"+(i+1)+"Temp").html("Temp: "+temp.toFixed(2));
                 $("#day"+(i+1)+"Humid").html("Humidity: "+humid);
             }
-            //Current stats
+            //Copy current weather
             day = moment().format('l');
             temp = ((newWeatherData.current.temp) - 273.15) * 9/5 + 32;;
             humid = newWeatherData.current.humidity;
@@ -98,14 +100,18 @@ function getData(){
             $("#currHumid").html("Humidity: "+humid);
             $("#currWindSpd").html("Wind Speed: "+windSpd);
             $("#currUVI").html(uvIndex);
-            //Adding class to UV card
+            //Adds a class or style to UV card depending on the level
             if(uvIndex <= 2)
+                //Green
                 $("#currUVI").addClass("bg-success");
             else if( 3 <= uvIndex && uvIndex <=5)
+                //Yellow
                 $("#currUVI").addClass("bg-warning");
             else if( 6 <= uvIndex && uvIndex <= 7)
+                //Orange
                 $("#currUVI").attr("style","background: rgb(236, 89, 4);");
             else
+                //Red
                 $("#currUVI").addClass("bg-danger");
         });
     });
