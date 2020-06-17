@@ -37,32 +37,43 @@ getData();
 //When a list-group-item is clicked then take in the city, display the weather info and add it to local storage
 $(".list-group-item").each(function(){
     $(this).on("click",function(){
+        //We assign the list-item's text to city
         city = $(this).html();
+        //We retrieve the weather data using new city value
         getData();
+        //Save the city selected
         cityArray.push({city: city});
         localStorage.setItem("cities", JSON.stringify(cityArray));
+        //We cycle through our list items and rearrange the cities based on search history
         cycleCityChanged($(this).attr("id"));
-        $("#1").html(city);
     })
 });
 //When the user uses the search bar we take the input and display the city, display the weather info and add it to local storage
 $("#srchBtn").on("click", function(event){
     event.preventDefault();
-    city = $(this).siblings("input").val();
+    //We assign the inputted text to city
+    city = $(this).siblings("input").val().trim();
+    //Save the city selected
     cityArray.push({city: city});
     localStorage.setItem("cities", JSON.stringify(cityArray));
+    //We set a placeholder to use for our cycle function
     var pointToItem = $(this).attr("id");
+    //Keeps track of any changed to placeholder
     var changed = false;
+    //Go through each list item and compare any duplicate to our search city
     $(".list-group-item").each(function(){
         if(city == $(this).html()){
+            //If the city searched is on the list. We point to the already existing display of this city
             pointToItem = $(this).attr("id");
             changed = true;
         }
     });
+    //We must pick the sorting functions based on change
     if(changed)
         cycleCityChanged(pointToItem);
     else
         searchBarCycleList();
+    //We retrieve the weather data using new city value
     getData();
 });
 //First call gets us the city's long-lat values
@@ -130,18 +141,22 @@ function getData(){
         });
     });
 };
-
+//This function is used for clicking the list-group
 function cycleCityChanged(id){
+    //We take an input of id for this function to go to it to cycle the cities downward
     var temp = $("#"+id).html();
     for(var i=(id); i > 0; i--){
         $("#"+i).html($("#"+(i-1)).html())
     }
+    //Once we move all the cities down a item, we display the city to the first item signifying current city
     $("#1").html(temp);
 }
-
+//This function is used for the search bar
 function searchBarCycleList(){
+    //We cycle through our list items from bottom to top and move cities downward
     for(var i=8; i > 0; i--){
         $("#"+i).html($("#"+(i-1)).html());
     }
+    //After, we overwrite the first item with the current city
     $("#1").html(city);
 }
