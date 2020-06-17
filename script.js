@@ -12,22 +12,22 @@ var sampleCityBtns2= ["Austin","Los Angeles","Phoenix","San Diego","El Paso","Da
 if(cityArray.length == 0){
     city = "Philadelphia";
     for(var i=0; i < $(".list-group-item").length; i++){
-        $("#ls"+(i+1)).html(sampleCityBtns[i]);
+        $("#"+(i+1)).html(sampleCityBtns[i]);
     }
 }
 else {
-    city = cityArray[cityArray.length - 1];
+    city = cityArray[cityArray.length - 1].city;
     var counter = 0;
     //If it's not empty we want to display cities previously searched, from top to bottom
     for(var i=cityArray.length; i > 0 && counter < 8 ; i--){
         var assignStoredCity = cityArray[i-1].city;
-        $("#ls"+(counter+1)).html(assignStoredCity);
+        $("#"+(counter+1)).html(assignStoredCity);
         counter++;
     }
     //If some buttons are still empty, pull sample cities from second sample array
     if(counter < 8){
         for(var i= counter; i < 8; i++){
-            $("#ls"+(i+1)).html(sampleCityBtns2[i]);
+            $("#"+(i+1)).html(sampleCityBtns2[i]);
         }
     }
 }
@@ -41,6 +41,8 @@ $(".list-group-item").each(function(){
         getData();
         cityArray.push({city: city});
         localStorage.setItem("cities", JSON.stringify(cityArray));
+        cycleCityChanged($(this).attr("id"));
+        $("#1").html(city);
     })
 });
 //When the user uses the search bar we take the input and display the city, display the weather info and add it to local storage
@@ -49,6 +51,18 @@ $("#srchBtn").on("click", function(event){
     city = $(this).siblings("input").val();
     cityArray.push({city: city});
     localStorage.setItem("cities", JSON.stringify(cityArray));
+    var pointToItem = $(this).attr("id");
+    var changed = false;
+    $(".list-group-item").each(function(){
+        if(city == $(this).html()){
+            pointToItem = $(this).attr("id");
+            changed = true;
+        }
+    });
+    if(changed)
+        cycleCityChanged(pointToItem);
+    else
+        searchBarCycleList();
     getData();
 });
 //First call gets us the city's long-lat values
@@ -116,3 +130,18 @@ function getData(){
         });
     });
 };
+
+function cycleCityChanged(id){
+    var temp = $("#"+id).html();
+    for(var i=(id); i > 0; i--){
+        $("#"+i).html($("#"+(i-1)).html())
+    }
+    $("#1").html(temp);
+}
+
+function searchBarCycleList(){
+    for(var i=8; i > 0; i--){
+        $("#"+i).html($("#"+(i-1)).html());
+    }
+    $("#1").html(city);
+}
