@@ -6,35 +6,41 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/><body>
+    <link rel="stylesheet" href="style.css">
     <header>
         <nav class="navbar justify-content-center bg-dark" style="color: white">
             <h1>Weather Dashboard</h1>
         </nav>
     </header>
     <main>
-        <section class="row pr-0">
-            <section class="col-3" style="background: rgb(247, 246, 246);">
+        <section class="row">
+            <section class="col-lg-3 col-md-12" style="background: rgb(247, 246, 246);">
                 <section class="row">
                     <form class="form-inline pt-3 pl-4">
                         <h4>Search for a City:</h4>
-                        <input id="srchText" class="mt-1 pb-1" name="input" type="search"    aria-label="Search">
-                        <button id="srchBtn" class="btn bg-primary mt-1 pt-1 pb-1" type="submit"><i class="fas fa-search"></i></button>
-                    </form></section>
-                    <section class="list-group pt-3 pl-2">
-                        <button id="1" type="button" class="list-group-item list-group-item-action"></button>
-                        <button id="2" type="button" class="list-group-item list-group-item-action"></button>
-                        <button id="3" type="button" class="list-group-item list-group-item-action"></button>
-                        <button id="4" type="button" class="list-group-item list-group-item-action"></button>
-                        <button id="5" type="button" class="list-group-item list-group-item-action"></button>
-                        <button id="6" type="button" class="list-group-item list-group-item-action"></button>
-                        <button id="7" type="button" class="list-group-item list-group-item-action"></button>
-                        <button id="8" type="button" class="list-group-item list-group-item-action"></button>
+                        <input id="srchText" class="mt-1 pb-1 ml-2" name="input" type="search"    aria-label="Search">
+                        <button id="srchBtn" class="btn bg-primary mt-1 pt-1 pb-1 ml-2" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </section>
+                <section class="row">
+                    <section id="listGroup" class="list-group pt-3 pl-2 col-12">
+                        <section class="row">
+                            <button id="1" type="button" class="list-group-item list-group-item-action col-lg-12 col-md-3 col-sm-3"></button>
+                            <button id="2" type="button" class="list-group-item list-group-item-action col-lg-12 col-md-3 col-sm-3"></button>
+                            <button id="3" type="button" class="list-group-item list-group-item-action col-lg-12 col-md-3 col-sm-3"></button>
+                            <button id="4" type="button" class="list-group-item list-group-item-action col-lg-12 col-md-3 col-sm-3"></button>
+                            <button id="5" type="button" class="list-group-item list-group-item-action col-lg-12 col-md-3 col-sm-3"></button>
+                            <button id="6" type="button" class="list-group-item list-group-item-action col-lg-12 col-md-3 col-sm-3"></button>
+                            <button id="7" type="button" class="list-group-item list-group-item-action col-lg-12 col-md-3 col-sm-3"></button>
+                            <button id="8" type="button" class="list-group-item list-group-item-action col-lg-12 col-md-3 col-sm-3"></button>
+                        </section>
                     </section>
+                </section>
             </section>
-            <section class="col-9">
+            <section class="col-lg-9 col-md-12 col-sm-12">
                 <section class="row">
                     <section class="border p-3 m-3 w-100"> 
-                        <section class="row">
+                        <section class="row ml-1">
                             <h2 id="currCity"></h2>
                             <img style="width: 60px;" id="currIcon"/>
                         </section>
@@ -49,13 +55,13 @@
                 </section>
                 <section class="row">
                     <section class="row ml-3 w-80">
-                        <h2 class="pl-3">5 Day Forecast:</h2>
+                        <h2 id="forecast" class="pl-3">5 Day Forecast:</h2>
                     </section>
                     <section class="row ml-3 w-100">
-                        <section class="col">
+                        <section class="col-12">
                             <section class="row pl-1 w-100">
-                                <section class="col pr-3">
-                                    <section id="day1" class="card">
+                                <section class="col-lg col-md-4 col-sm-6 col-xs-12 pr-3 justify-content-center">
+                                    <section class="col-12" id="day1" class="card">
                                         <figure class="bg-primary text-light card-body">
                                             <p id="day1Date"></p>
                                             <img id="day1Icon"/>
@@ -64,8 +70,8 @@
                                         </figure>
                                     </section>
                                 </section>
-                                <section class="col pr-3">
-                                    <section id="day2" class="card">
+                                <section class="col-lg col-md-4 col-sm-6 col-xs-12 pr-3 justify-content-center">
+                                    <section class="col-12" id="day2" class="card">
                                         <figure class="bg-primary text-light card-body">
                                             <p id="day2Date"></p>
                                             <img id="day2Icon"/>
@@ -74,8 +80,8 @@
                                         </figure>
                                     </section>
                                 </section>
-                                <section class="col pr-3">
-                                    <section id="day3" class="card">
+                                <section class="col-lg col-md-4 col-sm-6 col-xs-12 pr-3 justify-content-center">
+                                    <section class="col-12" id="day3" class="card">
                                         <figure class="bg-primary text-light card-body">
                                             <p id="day3Date"></p>
                                             <img id="day3Icon"/>
@@ -84,8 +90,8 @@
                                         </figure>
                                     </section>
                                 </section>
-                                <section class="col pr-3">
-                                    <section id="day4" class="card">
+                                <section class="col-lg col-md-4 col-sm-6 col-xs-12 pr-3 justify-content-center">
+                                    <section class="col-12" id="day4" class="card">
                                         <figure class="bg-primary text-light card-body">
                                             <p id="day4Date"></p>
                                             <img id="day4Icon"/>
@@ -94,8 +100,8 @@
                                         </figure>
                                     </section>
                                 </section>
-                                <section class="col">
-                                    <section id="day5" class="card">
+                                <section class="col-lg col-md-4 col-sm-6 col-xs-12 pr-3 justify-content-center">
+                                    <section class="col-12" id="day5" class="card">
                                         <figure class="bg-primary text-light card-body">
                                             <p id="day5Date"></p>
                                             <img id="day5Icon"/>

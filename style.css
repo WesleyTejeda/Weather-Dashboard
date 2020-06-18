@@ -1,0 +1,16 @@
+@media screen and (min-width: 0px) and (max-width: 599px) {
+    #listGroup { display: none; }  
+    
+  }
+  
+@media screen and (min-width: 600px) and (max-width: 1024px) {
+    #listGroup { display: block; }  
+    
+  }
+
+  @media screen and (min-width: 0px) and (max-width: 991px) {
+    #forecast, #currCity {justify-content: center;}
+  }
+  @media screen and (min-width: 992px) and (max-width: 1024px) {
+    #forecast, #currCity {justify-content: left;}
+  }
